@@ -1,45 +1,28 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Image from "../assets/index";
-import { FiChevronDown } from "react-icons/fi";
-import { BsHandbag } from "react-icons/bs";
-import { BiUser } from "react-icons/bi";
-import { Dropdown } from "antd";
+import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
+import Image from '../assets/index';
+import { FiChevronDown } from 'react-icons/fi';
+import { BsHandbag,} from 'react-icons/bs';
+import { BiUser } from 'react-icons/bi';
 
 const Header = () => {
-  const [isLogin, setIsLogin] = useState(localStorage.getItem("user-info"));
-  const navigate = useNavigate();
-
-  const items = [
-    {
-      label: (
-        <p
-          onClick={() => {
-            navigate("/profile");
-          }}
-        >
-          Profile
-        </p>
-      ),
-      key: "item-1",
-    }, // remember to pass the key prop
-    {
-      label: (
-        <p
-          onClick={() => {
-            localStorage.removeItem("user-info");
-            navigate("/");
-          }}
-        >
-          Logout
-        </p>
-      ),
-      key: "item-2",
-    },
-  ];
-
+  const [currentLang, setCurrentLang] = useState("EN");
+  
+  const changeLang = (newLang) => {
+    setCurrentLang(newLang)
+  }
+  const lang = ["EN","JP"];
   return (
     <header className="header">
+      <style jsx global>{`
+        select {
+          border: none;
+          outline: none;
+          scroll-behavior: smooth;
+          background: transparent;
+          font-weight: bolder;
+        }
+      `}</style>
       <h1 className="header-logo">
         <Link to={isLogin ? "/home" : "/"} className="header-logo-image">
           <img src={Image.Logo} alt="t-hotel" />
@@ -71,12 +54,14 @@ const Header = () => {
       </nav>
       <div className="header-right">
         <div className="header-lang">
-          <ul className="header-lang-list">
-            <li className="header-lang-item">EN</li>
-          </ul>
-          <div className="header-lang-icon">
-            <FiChevronDown />
-          </div>
+        <select onChange={(event) => changeLang(event.target.value)}
+        value={currentLang} >
+            {lang.map((i, index) => (
+              <option key={index} value={i} >
+                {i}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="header-auth">
           <div className="header-auth-link">
