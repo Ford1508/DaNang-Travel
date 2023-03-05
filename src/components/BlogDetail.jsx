@@ -20,20 +20,41 @@ export default function BlogDetail() {
   const [category, setCategory] = useState();
   useEffect(() => {
     const URL2 = api + `api/blog/comments/${params.id}`;
-    axios.get(URL2).then((res) => {
+    axios.get(URL2,
+      {
+        headers: new Headers({
+          "ngrok-skip-browser-warning": "69420",
+        }),
+        mode: "no-cors",
+      }
+      ).then((res) => {
       console.log(res.data);
       setComments(res.data);
     });
   }, [clickCmt]);
   useEffect(() => {
     const URL = api + 'api/category';
-    axios.get(URL).then((res) => {
+    axios.get(URL,
+      {
+        headers: new Headers({
+          "ngrok-skip-browser-warning": "69420",
+        }),
+        mode: "no-cors",
+      }
+      ).then((res) => {
       setCategory(res.data);
     });
   }, []);
   useEffect(() => {
     const URL = api + `api/blog/${params.id}`;
-    axios.get(URL).then((res) => {
+    axios.get(URL,
+      {
+        headers: new Headers({
+          "ngrok-skip-browser-warning": "69420",
+        }),
+        mode: "no-cors",
+      }
+      ).then((res) => {
       console.log(res.data);
       setBlogdata(res.data);
     });
@@ -41,7 +62,14 @@ export default function BlogDetail() {
 
   useEffect(() => {
     const URL = api + 'api/blog';
-    axios.get(URL).then((res) => {
+    axios.get(URL,
+      {
+        headers: new Headers({
+          "ngrok-skip-browser-warning": "69420",
+        }),
+        mode: "no-cors",
+      }
+      ).then((res) => {
       console.log(res.data);
       setPopulars(res.data);
     });
@@ -92,7 +120,14 @@ export default function BlogDetail() {
                               )['id'],
                               rating: index,
                             },
-                          })
+                          },
+                          {
+                            headers: new Headers({
+                              "ngrok-skip-browser-warning": "69420",
+                            }),
+                            mode: "no-cors",
+                          }
+                          )
                           .then((res) => {
                             setClickRate(clickRate + 1);
                           });
@@ -240,7 +275,14 @@ export default function BlogDetail() {
                                 localStorage.getItem('user-info')
                               )['id'],
                               body: commentbody,
-                            })
+                            },
+                            {
+                              headers: new Headers({
+                                "ngrok-skip-browser-warning": "69420",
+                              }),
+                              mode: "no-cors",
+                            }
+                            )
                             .then((res) => {
                               setClickCmt(clickCmt + 1);
                               setCommentbody('');

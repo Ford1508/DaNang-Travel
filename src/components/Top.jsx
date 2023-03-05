@@ -22,7 +22,14 @@ export default function Top() {
 
   useEffect(() => {
     const URL = api + `api/blogByCate?category_id=${categoryId}`;
-    axios.get(URL).then((res) => {
+    axios.get(URL,
+      {
+        headers: new Headers({
+          "ngrok-skip-browser-warning": "69420",
+        }),
+        mode: "no-cors",
+      }
+      ).then((res) => {
       console.log(res.data);
       setBlog(res.data);
     });
@@ -78,7 +85,14 @@ export default function Top() {
       const URL = api + 'api/category';
       setIsRequestAPI(true);
       axios
-        .get(URL)
+        .get(URL,
+          {
+            headers: new Headers({
+              "ngrok-skip-browser-warning": "69420",
+            }),
+            mode: "no-cors",
+          }
+          )
         .then((res) => {
           setCategory(res.data);
           setIsRequestAPI(false);

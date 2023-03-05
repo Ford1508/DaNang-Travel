@@ -55,6 +55,10 @@ export default function FormProfile() {
           headers: {
             "Content-Type": "multipart/form-data",
           },
+          headers: new Headers({
+            "ngrok-skip-browser-warning": "69420",
+          }),
+          mode: "no-cors",
         }
       )
       .then((res) => {

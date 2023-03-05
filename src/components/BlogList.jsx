@@ -18,14 +18,28 @@ export default function BlogList() {
   const navigate = useNavigate();
   useEffect(() => {
     const URL = api + 'api/category';
-    axios.get(URL).then((res) => {
+    axios.get(URL,
+      {
+        headers: new Headers({
+          "ngrok-skip-browser-warning": "69420",
+        }),
+        mode: "no-cors",
+      }
+      ).then((res) => {
       setCategory(res.data);
     });
   }, []);
 
   useEffect(() => {
     const URL = api + 'api/blog';
-    axios.get(URL).then((res) => {
+    axios.get(URL,
+      {
+        headers: new Headers({
+          "ngrok-skip-browser-warning": "69420",
+        }),
+        mode: "no-cors",
+      }
+      ).then((res) => {
       setPopulars(res.data);
 
     });
@@ -33,7 +47,14 @@ export default function BlogList() {
 
   useEffect(() => {
     const URL = api + `api/blogByCateFull?category_id=${categoryId}`;
-    axios.get(URL).then((res) => {
+    axios.get(URL,
+      {
+        headers: new Headers({
+          "ngrok-skip-browser-warning": "69420",
+        }),
+        mode: "no-cors",
+      }
+      ).then((res) => {
       setBlog(res.data);
       console.log(res.data)
     });

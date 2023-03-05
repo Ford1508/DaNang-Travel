@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import validator from 'validator';
 import axios from 'axios'
-import { toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { api } from '../../API/api';
 
@@ -24,99 +24,117 @@ export default function Login() {
   const [logintext, setLogintext] = useState('');
   const [loginpassword, setLoginpassword] = useState('');
 
-    async function onLogin(e){
-        e.preventDefault();
-        if(logintext === "" || loginpassword === ""){
-            console.log("error")
-            toast.error('please fill all the fields')
-        }
-        else{
-            if(validator.isEmail(logintext)) {
-                let data = {
-                    "email":logintext,
-                    "password":loginpassword
-                }
-                console.log("email")
-                axios.post(api + "api/login", data,
-                    {
-                        headers:{
-                            "Content-Type" : "application/json",
-                            "Accept" : "application/json"
-                        }
-                    }
-                ).then(res => {
-                    console.log(res.data)
-                    localStorage.setItem('user-info', JSON.stringify(res.data))
-                    toast.success('Login successfully!')
-                    routeChange()
-                }).catch(error => {
-                    console.log(error)
-                    toast.error('wrong password or username or email!')
-                })
-            } else {
-                console.log("username")
-                let data = {
-                    "username":logintext,
-                    "password":loginpassword
-                }
-                console.log(data)
-                axios.post(api + "api/login", data,
-                    {
-                        headers:{
-                            "Content-Type" : "application/json",
-                            "Accept" : "application/json"
-                        }
-                    }
-                ).then(res => {
-                    console.log(res.data)
-                    localStorage.setItem('user-info', JSON.stringify(res.data))
-                    toast.success('Login successfully!')
-                    routeChange()
-                }).catch(error => {
-                    console.log(error)
-                    toast.error('wrong password or username or email!')
-                })
-            }
-        }
+  async function onLogin(e) {
+    e.preventDefault();
+    if (logintext === "" || loginpassword === "") {
+      console.log("error")
+      toast.error('please fill all the fields')
     }
-  
-  
-    async function onSignin(e){
-        e.preventDefault();
-        if(username === "" || password === "" || password2 === "" || email === "" || name === ""){
-            console.log("error")
-            toast.error('please fill all the fields')
+    else {
+      if (validator.isEmail(logintext)) {
+        let data = {
+          "email": logintext,
+          "password": loginpassword
         }
-        else if ( password !== password2){
-            console.log("error")
-            toast.error('the password and confirm password must be the same.')
-        }
-        else{
-            console.log("signin")
-            let data = {
-                "name":name,
-                "username":username,
-                "email":email,
-                "password":password,
-            }
+        console.log("email")
+        axios.post(api + "api/login", data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
 
-            axios.post(api + "api/register", data,
-                {
-                    headers:{
-                        "Content-Type" : "application/json",
-                        "Accept" : "application/json"
-                    }
-                }
-            ).then(res => {
-                console.log(res.data)
-                toast.success('register successfully!')
-            }).catch(error => {
-                console.log(error)
-                toast.error('register failed!')
-            })
+            headers: new Headers({
+              "ngrok-skip-browser-warning": "69420",
+            }),
+            mode: "no-cors",
+
+          }
+        ).then(res => {
+          console.log(res.data)
+          localStorage.setItem('user-info', JSON.stringify(res.data))
+          toast.success('Login successfully!')
+          routeChange()
+        }).catch(error => {
+          console.log(error)
+          toast.error('wrong password or username or email!')
+        })
+      } else {
+        console.log("username")
+        let data = {
+          "username": logintext,
+          "password": loginpassword
         }
+        console.log(data)
+        axios.post(api + "api/login", data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+
+            headers: new Headers({
+              "ngrok-skip-browser-warning": "69420",
+            }),
+            mode: "no-cors",
+
+          }
+        ).then(res => {
+          console.log(res.data)
+          localStorage.setItem('user-info', JSON.stringify(res.data))
+          toast.success('Login successfully!')
+          routeChange()
+        }).catch(error => {
+          console.log(error)
+          toast.error('wrong password or username or email!')
+        })
+      }
     }
-  
+  }
+
+
+  async function onSignin(e) {
+    e.preventDefault();
+    if (username === "" || password === "" || password2 === "" || email === "" || name === "") {
+      console.log("error")
+      toast.error('please fill all the fields')
+    }
+    else if (password !== password2) {
+      console.log("error")
+      toast.error('the password and confirm password must be the same.')
+    }
+    else {
+      console.log("signin")
+      let data = {
+        "name": name,
+        "username": username,
+        "email": email,
+        "password": password,
+      }
+
+      axios.post(api + "api/register", data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          headers: new Headers({
+            "ngrok-skip-browser-warning": "69420",
+          }),
+          mode: "no-cors",
+
+
+        }
+      ).then(res => {
+        console.log(res.data)
+        toast.success('register successfully!')
+      }).catch(error => {
+        console.log(error)
+        toast.error('register failed!')
+      })
+    }
+  }
+
   return (
     <Content>
       <Container>

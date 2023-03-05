@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 
 export default function ChangePassword() {
   const { Title } = Typography;
-  const {t}  = useTranslation()
+  const { t } = useTranslation()
   const [isHide, setIsHide] = useState(true);
 
   const {
@@ -29,7 +29,11 @@ export default function ChangePassword() {
       {
         headers: {
           "Content-Type": "multipart/form-data",
-        }
+        },
+        headers: new Headers({
+          "ngrok-skip-browser-warning": "69420",
+        }),
+        mode: "no-cors",
       }
     ).then(
       res => {
@@ -50,7 +54,7 @@ export default function ChangePassword() {
             </Col>
 
             <Col span={16} offset={4}>
-              <FormInput  
+              <FormInput
                 name='user_id'
                 defaultValue={JSON.parse(localStorage.getItem('user-info'))?.id}
                 disabled={true}
@@ -78,7 +82,7 @@ export default function ChangePassword() {
                 <Row>
                   <Col xl={{ span: 18, offset: 6 }} sm={24} xs={24}>
                     <Checkbox onChange={(e) => setIsHide(Boolean(!e.target.checked))} className='form__checkbox '>
-                    {t('profile.show_password')}
+                      {t('profile.show_password')}
                     </Checkbox>
                   </Col>
                 </Row>

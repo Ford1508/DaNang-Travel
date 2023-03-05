@@ -18,7 +18,13 @@ const FormPost = () => {
       setIsRequestAPI(true);
       axios
         .post(
-          `${URL}?name=${data.name}&description=${data.description}&image=${data.image[0].name}&address=${data.address}&user_id=${userInfo.id}&category_id=${data.category}`
+          `${URL}?name=${data.name}&description=${data.description}&image=${data.image[0].name}&address=${data.address}&user_id=${userInfo.id}&category_id=${data.category}`,
+          {
+            headers: new Headers({
+              "ngrok-skip-browser-warning": "69420",
+            }),
+            mode: "no-cors",
+          }
         )
         .then((res) => {
           navigate(`/blog/${res.data.id}`);
@@ -35,7 +41,14 @@ const FormPost = () => {
       const URL = api + 'api/category';
       setIsRequestAPI(true);
       axios
-        .get(URL)
+        .get(URL,
+          {
+            headers: new Headers({
+              "ngrok-skip-browser-warning": "69420",
+            }),
+            mode: "no-cors",
+          }
+        )
         .then((res) => {
           setCategory(res.data);
           setIsRequestAPI(false);
