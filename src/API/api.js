@@ -1,2 +1,2 @@
-export const api = "https://danang-travel-be-production.up.railway.app/"
-export const api_image = "https://danang-travel-be-production.up.railway.app/storage/"
+export const api = "https://3bf3-58-187-198-82.ap.ngrok.io/"
+export const api_image = "https://3bf3-58-187-198-82.ap.ngrok.io/"
